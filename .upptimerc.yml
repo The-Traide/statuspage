@@ -1,5 +1,5 @@
 # Change these first
-owner: nautical-commerce # Your GitHub organization or username, where this repository lives
+owner: The-Traide # Your GitHub organization or username, where this repository lives
 repo: statuspage # The name of this repository
 
 sites:
@@ -8,11 +8,11 @@ sites:
   - name: Hosted Storefronts - Production
     url: https://default.mynauticalstore.com/version
   - name: Hosted Checkout - Production
-    url: https://checkout.nauticalcommerce.com/version
+    url: https://checkout.thetraide.com/version
   - name: Admin Dashboards - Production
     url: https://default.mpconsole.com/version
-  - name: Nautical Guide (guide.nauticalcommerce.com)
-    url: https://guide.nauticalcommerce.com
+  - name: The Traide Guide (guide.thetraide.com)
+    url: https://guide.thetraide.com
 
   # - name: Test Broken Site
   #   url: https://thissitedoesnotexist.koj.co
@@ -25,17 +25,17 @@ sites:
 status-website:
   # Add your custom domain name, or remove the `cname` line if you don't have a domain
   # Uncomment the `baseUrl` line if you don't have a custom domain and add your repo name there
-  cname: status.nauticalcommerce.com
+  cname: status.thetraide.com
   # baseUrl: /statuspage
   logoUrl: https://avatars.githubusercontent.com/u/63327933
-  name: Nautical Commerce
+  name: The Traide
   # introTitle: "**Your** marketplace operating system."
   # introMessage: This is a sample status page which uses **real-time** data from our [GitHub repository](https://github.com/upptime/upptime). No server required — just GitHub Actions, Issues, and Pages. [**Get your own for free**](https://github.com/upptime/upptime)
   navbar:
     - title: Status
       href: /
     - title: Website ↗
-      href: https://www.nauticalcommerce.com
+      href: https://www.thetraide.com
     # - title: GitHub
     #   href: https://github.com/$OWNER/$REPO
 # Upptime also supports notifications, assigning issues, and more
