@@ -1,0 +1,106 @@
+# Claude Code Interactive — @claude mentions in PRs and issues
+#
+# Responds when someone tags @claude in a PR comment, issue comment,
+# or PR review. Auth: OAuth via Claude GitHub App.
+# Mention-only trigger — the org deliberately does NOT use the auto-review
+# workflow (claude-code-review.yml).
+
+name: Claude Code
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  pull_request_review:
+    types: [submitted]
+
+concurrency:
+  group: claude-interactive-${{ github.event.issue.number || github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  claude:
+    if: |
+      ((github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+       (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+       (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))) &&
+      github.actor != 'claude[bot]' &&
+      github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          additional_permissions: |
+            actions: read
+          exclude_comments_by_actor: "dependabot[bot],renovate[bot]"
+          # track_progress forces "tag" mode: the GitHub context (triggering
+          # comment, PR, conversation) is injected and a tracking comment is
+          # created. REQUIRED whenever `prompt` is set on an @claude trigger —
+          # without it the action auto-detects "agent" mode, Claude never sees
+          # the comment or PR, and exits after a single turn with no review.
+          track_progress: true
+          prompt: |
+            ## Reviewing a PR (the default when @claude is mentioned on a PR)
+
+            Review the diff against this repo's conventions (see CLAUDE.md / README
+            and the surrounding code) and the focus areas below. Post ONE comment
+            structured as **Verdict / Findings / Suggestions**, tagging each finding
+            CRITICAL / WARNING / SUGGESTION. Be concrete — cite file and line and
+            prefer a suggested diff over prose. If nothing needs changing, say so.
+
+            If the triggering comment asks for something other than a review
+            (answer a question, draft a fix), do that instead, applying the same
+            conventions.
+
+            ### What matters most in this repo (statuspage — Upptime, mostly generated)
+            - An Upptime status page: humans edit `.upptimerc.yml` (monitored
+              endpoints, notifications) and the workflow files; almost everything
+              else is machine-generated.
+            - Flag edits to auto-generated files (history/**, the README status
+              blocks, graphs) — Upptime overwrites them, so hand-edits are lost.
+            - Sanity-check any monitored-URL or expected-status change against what
+              it actually monitors — a wrong URL silently breaks a monitor.
+            - No secrets committed — they belong in repo Actions secrets referenced
+              by the Upptime workflows.
+
+            ## Stack-aware review
+
+            If the triggering comment mentions "stack" (e.g. "review this stack",
+            "review downstack", "review all of this"), review EVERY PR in the
+            Graphite stack — not just the one the comment is on:
+            1. The PR body has a Graphite stack comment listing each PR as
+               `* **#NNNN**` (the current PR is marked 👈).
+            2. For each PR number N (including the current one), run:
+               `gh pr diff N --repo ${{ github.repository }}`
+               `gh pr view N --repo ${{ github.repository }} --json title,body`
+            3. Post one consolidated comment with a `### PR #N — <title>` section
+               per PR.
+            For a non-stack mention, review only the PR the comment was posted on.
+          # allowedTools: NO SPACES inside Bash() patterns — the shell tokenizes
+          # claude_args on whitespace before --allowedTools comma-splits, so
+          # `Bash(gh pr view:*)` would leak `pr`/`view:*)` as positional args.
+          # Use `Bash(gh:*)` (prefix-matches all gh subcommands).
+          #
+          # mcp__github_comment__update_claude_comment is required for Claude to
+          # post the review back — auto-added when --allowedTools is unset, but
+          # explicit --allowedTools REPLACES defaults, so list it.
+          claude_args: "--model claude-opus-4-7 --max-turns 100 --allowedTools Read,Glob,Grep,LS,Bash(gh:*),Bash(git:*),mcp__github_comment__update_claude_comment,mcp__github_ci__get_ci_status,mcp__github_ci__get_workflow_run_details,mcp__github_ci__download_job_log"
