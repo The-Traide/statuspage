@@ -103,4 +103,4 @@ jobs:
           # mcp__github_comment__update_claude_comment is required for Claude to
           # post the review back — auto-added when --allowedTools is unset, but
           # explicit --allowedTools REPLACES defaults, so list it.
-          claude_args: "--model claude-opus-4-7 --max-turns 100 --allowedTools Read,Glob,Grep,LS,Bash(gh:*),Bash(git:*),mcp__github_comment__update_claude_comment,mcp__github_ci__get_ci_status,mcp__github_ci__get_workflow_run_details,mcp__github_ci__download_job_log"
+          claude_args: "--model claude-opus-4-8 --max-turns 100 --allowedTools Read,Glob,Grep,LS,Bash(gh:*),Bash(git:*),mcp__github_comment__update_claude_comment,mcp__github_ci__get_ci_status,mcp__github_ci__get_workflow_run_details,mcp__github_ci__download_job_log"
