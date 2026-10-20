@@ -6,7 +6,7 @@ sites:
   - name: API - Production
     url: https://api.mpconsole.com/about
   - name: Hosted Storefronts - Production
-    url: https://default.mynauticalstore.com/version
+    url: https://default.letstraide.com/version
   - name: Hosted Checkout - Production
     url: https://checkout.thetraide.com/version
   - name: Admin Dashboards - Production
