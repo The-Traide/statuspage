@@ -10,38 +10,30 @@
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 214,
+    "time": 208,
     "timeDay": 0,
     "timeWeek": 0,
     "timeMonth": 0,
-    "timeYear": 214,
-    "dailyMinutesDown": {
-      "2025-05-09": 5,
-      "2025-04-22": 9
-    }
+    "timeYear": 0,
+    "dailyMinutesDown": {}
   },
   {
     "name": "Hosted Storefronts - Production",
-    "url": "https://default.mynauticalstore.com/version",
-    "icon": "https://icons.duckduckgo.com/ip3/default.mynauticalstore.com.ico",
+    "url": "https://default.letstraide.com/version",
+    "icon": "https://icons.duckduckgo.com/ip3/default.letstraide.com.ico",
     "slug": "hosted-storefronts-production",
     "status": "up",
-    "uptime": "99.99%",
+    "uptime": "100.00%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
-    "uptimeYear": "99.99%",
-    "time": 191,
+    "uptimeYear": "100.00%",
+    "time": 204,
     "timeDay": 0,
     "timeWeek": 0,
     "timeMonth": 0,
-    "timeYear": 193,
-    "dailyMinutesDown": {
-      "2025-08-16": 5,
-      "2025-08-15": 20,
-      "2025-08-13": 20,
-      "2025-05-13": 11
-    }
+    "timeYear": 0,
+    "dailyMinutesDown": {}
   },
   {
     "name": "Hosted Checkout - Production",
@@ -49,20 +41,17 @@
     "icon": "https://icons.duckduckgo.com/ip3/checkout.thetraide.com.ico",
     "slug": "hosted-checkout-production",
     "status": "down",
-    "uptime": "99.99%",
+    "uptime": "100.00%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
-    "uptimeYear": "99.99%",
-    "time": 305,
+    "uptimeYear": "100.00%",
+    "time": 310,
     "timeDay": 0,
     "timeWeek": 0,
     "timeMonth": 0,
-    "timeYear": 311,
-    "dailyMinutesDown": {
-      "2025-08-13": 18,
-      "2025-02-27": 22
-    }
+    "timeYear": 0,
+    "dailyMinutesDown": {}
   },
   {
     "name": "Admin Dashboards - Production",
@@ -74,16 +63,13 @@
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
-    "uptimeYear": "99.99%",
-    "time": 186,
+    "uptimeYear": "100.00%",
+    "time": 195,
     "timeDay": 0,
     "timeWeek": 0,
     "timeMonth": 0,
-    "timeYear": 188,
-    "dailyMinutesDown": {
-      "2025-08-16": 4,
-      "2025-08-13": 26
-    }
+    "timeYear": 0,
+    "dailyMinutesDown": {}
   },
   {
     "name": "The Traide Guide (guide.thetraide.com)",
@@ -97,9 +83,9 @@
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
     "time": 116,
-    "timeDay": 116,
-    "timeWeek": 116,
-    "timeMonth": 116,
+    "timeDay": 0,
+    "timeWeek": 0,
+    "timeMonth": 0,
     "timeYear": 116,
     "dailyMinutesDown": {}
   }
